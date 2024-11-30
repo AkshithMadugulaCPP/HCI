@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZARA Shopping Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/cart.css">
+    <link rel="stylesheet" href="src/styles/chat.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <div class="header-left">
+                <a href="#" class="back-arrow">←</a>
+            </div>
+            
+            <div class="logo">
+                <img src="assets/zara-logo.png" alt="ZARA">
+            </div>
+
+            <div class="header-right">
+                <div class="top-links">
+                    <a href="#">MY ACCOUNT</a>
+                    <a href="#">HELP</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="header-actions">
+                <a href="#" class="header-action">SHOPPING BAG (2)</a>
+                <a href="#" class="header-action">FAVORITES ♡</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="cart-items">
+        <div class="cart-item" data-product-id="1" data-size="L" data-color="PRINTED">
+            <img src="assets/recco-jacket.jpg" alt="RECCO® TECHNOLOGY WATER AND WIND PROTECTION DOWN JACKET SKI">
+            <div class="item-details">
+                <div class="few-items">FEW ITEMS LEFT</div>
+                <h3 class="item-title">RECCO® TECHNOLOGY WATER AND WIND PROTECTION DOWN JACKET SKI</h3>
+                <span class="item-price">$ 259.00</span>
+                <div class="item-options">
+                    <div class="item-size">
+                        <button type="button" class="size-selector" aria-haspopup="true" aria-expanded="false">L</button>
+                        <div class="size-dropdown" role="listbox" aria-label="Select size">
+                            <div class="size-option" role="option" data-size="S" tabindex="0">S</div>
+                            <div class="size-option" role="option" data-size="M" tabindex="0">M</div>
+                            <div class="size-option disabled" role="option" data-size="L" aria-disabled="true" tabindex="-1">L</div>
+                        </div>
+                    </div>
+                    <div class="item-color">
+                        <button type="button" class="color-selector" aria-haspopup="true" aria-expanded="false">PRINTED</button>
+                        <div class="color-dropdown" role="listbox" aria-label="Select color">
+                            <div class="color-option" role="option" data-color="PRINTED" tabindex="0">PRINTED</div>
+                            <div class="color-option disabled" role="option" data-color="BLACK" aria-disabled="true" tabindex="-1">BLACK</div>
+                            <div class="color-option" role="option" data-color="WHITE" tabindex="0">WHITE</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quantity-controls">
+                    <button type="button" class="quantity-btn" data-action="decrease" aria-label="Decrease quantity">-</button>
+                    <span class="quantity" role="spinbutton" aria-valuenow="1" aria-valuemin="1" aria-valuemax="10">1</span>
+                    <button type="button" class="quantity-btn" data-action="increase" aria-label="Increase quantity">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart-item" data-product-id="2" data-size="S" data-color="BROWN">
+            <img src="assets/washed-sweater.jpg" alt="WASHED TEXTURED SWEATER">
+            <div class="item-details">
+                <h3 class="item-title">WASHED TEXTURED SWEATER</h3>
+                <span class="item-price">$ 59.90</span>
+                <div class="item-options">
+                    <div class="item-size">
+                        <button type="button" class="size-selector" aria-haspopup="true" aria-expanded="false">S</button>
+                        <div class="size-dropdown" role="listbox" aria-label="Select size">
+                            <div class="size-option" role="option" data-size="S" tabindex="0">S</div>
+                            <div class="size-option disabled" role="option" data-size="M" aria-disabled="true" tabindex="-1">M</div>
+                            <div class="size-option" role="option" data-size="L" tabindex="0">L</div>
+                        </div>
+                    </div>
+                    <div class="item-color">
+                        <button type="button" class="color-selector" aria-haspopup="true" aria-expanded="false">BROWN</button>
+                        <div class="color-dropdown" role="listbox" aria-label="Select color">
+                            <div class="color-option" role="option" data-color="BROWN" tabindex="0">BROWN</div>
+                            <div class="color-option" role="option" data-color="BLACK" tabindex="0">BLACK</div>
+                            <div class="color-option disabled" role="option" data-color="GREY" aria-disabled="true" tabindex="-1">GREY</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="quantity-controls">
+                    <button type="button" class="quantity-btn" data-action="decrease" aria-label="Decrease quantity">-</button>
+                    <span class="quantity" role="spinbutton" aria-valuenow="1" aria-valuemin="1" aria-valuemax="10">1</span>
+                    <button type="button" class="quantity-btn" data-action="increase" aria-label="Increase quantity">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="total">
+            <span><b>TOTAL    $ 318.90</b></span>
+        </div>
+        <p class="tax-text">* TAX NOT INCLUDED</p>
+        <button type="button" class="continue-btn">CONTINUE</button>
+        <p class="privacy-text">
+            * By continuing, I state that I have read and accept the <a href="#">Purchase Conditions</a> and I understand the <a href="#">Privacy and Cookies Policy</a> of Zara.
+        </p>
+    </footer>
+
+    <script type="module">
+        import CartManager from './src/js/CartManager.js';
+        import ChatWidget from './src/js/ChatWidget.js';
+
+        // Initialize cart and chat when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.cartManager = new CartManager();
+            window.chatWidget = new ChatWidget();
+            window.chatWidget.init();
+        });
+    </script>
+</body>
+</html>
