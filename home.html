@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zara - Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/cart.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            
+            <div class="logo">
+                <img src="assets/zara-logo.png" alt="ZARA">
+            </div>
+
+            <div class="header-right">
+                <div class="top-links">
+                    <a href="home.html">Home</a>
+                    <a href="saved.html" id="saved-items-icon">Saved Items</a>
+                    <a href="shoppingcart.html">Shopping Bag</a>
+                    <a href="help.html">Help</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section id="product-details">
+            <h2>Product Details</h2>
+            <div class="product-container">
+                <!-- First Product (Blazer) -->
+                <div class="product-item">
+                    <div class="product-image">
+                        <img src="assets/product1.jpg" alt="Men's Blazer">
+                    </div>
+                    <div class="product-info">
+                        <h3>Blazer</h3>
+                        <p class="price">$89.99</p> 
+                        <p>This stylish men's blazer is perfect for both formal and casual occasions. Crafted from high-quality fabric, it offers a modern fit that complements any wardrobe.</p>
+                        <button class="save-item" 
+                                data-product-name="Blazer" 
+                                data-product-price="$89.99" 
+                                data-product-image="assets/product1.jpg"
+                                data-product-description="This stylish men's blazer is perfect for both formal and casual occasions. Crafted from high-quality fabric, it offers a modern fit that complements any wardrobe.">Save Item</button>
+                    </div>
+                </div>
+
+                <!-- Second Product (Women's Shoes) -->
+                <div class="product-item">
+                    <div class="product-image">
+                        <img src="assets/product2.jpg" alt="Women's Shoes">
+                    </div>
+                    <div class="product-info">
+                        <h3>Women's Shoes</h3>
+                        <p class="price">$79.99</p>
+                        <p>Step out in style with these elegant women's shoes. Designed with comfort in mind, they are perfect for both day and night wear.</p>
+                        <button class="save-item" 
+                                data-product-name="Women's Shoes" 
+                                data-product-price="$79.99" 
+                                data-product-image="assets/product2.jpg"
+                                data-product-description="Step out in style with these elegant women's shoes. Designed with comfort in mind, they are perfect for both day and night wear.">Save Item</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Zara. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

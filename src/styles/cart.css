@@ -80,6 +80,8 @@ body {
 }
 
 .header-right {
+    position: fixed;
+    right:10px;
     display: flex;
     gap: 28px;
     align-items: center;
@@ -415,6 +417,12 @@ body {
     text-align: right;
     font-weight: 300;
     padding-right: 200px;
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin-top: 40px;
 }
 
 /* Responsive Design */
