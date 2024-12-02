@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,16 +6,15 @@
     <title>Zara - Products</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/styles/cart.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="header">
         <div class="header-top">
-            
             <div class="logo">
                 <img src="assets/zara-logo.png" alt="ZARA">
             </div>
-
             <div class="header-right">
                 <div class="top-links">
                     <a href="home.html">Home</a>
@@ -33,24 +32,42 @@
             <h2>Product Details</h2>
             <div class="product-container">
                 <!-- First Product (Blazer) -->
-                <div class="product-item">
+                <div class="product-item" id="product1">
                     <div class="product-image">
                         <img src="assets/product1.jpg" alt="Men's Blazer">
                     </div>
                     <div class="product-info">
                         <h3>Blazer</h3>
-                        <p class="price">$89.99</p> 
+                        <p class="price">$89.99</p>
                         <p>This stylish men's blazer is perfect for both formal and casual occasions. Crafted from high-quality fabric, it offers a modern fit that complements any wardrobe.</p>
+                        
+                        <!-- Save Item -->
                         <button class="save-item" 
                                 data-product-name="Blazer" 
                                 data-product-price="$89.99" 
                                 data-product-image="assets/product1.jpg"
                                 data-product-description="This stylish men's blazer is perfect for both formal and casual occasions. Crafted from high-quality fabric, it offers a modern fit that complements any wardrobe.">Save Item</button>
+
+                        <!-- Size Selector -->
+                        <label for="size-select-product1">Select Size:</label>
+                        <select id="size-select-product1">
+                            <option value="">Choose size</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                        </select>
+
+                        <!-- Check Availability -->
+                        <button class="check-availability" data-product-id="product1">Check Availability</button>
+                        <div id="availability-status-product1"></div>
+
+                        <!-- Store Selection -->
+                        <p><strong>Shopping From:</strong> <span id="selected-store-product1">None</span></p>
                     </div>
                 </div>
 
                 <!-- Second Product (Women's Shoes) -->
-                <div class="product-item">
+                <div class="product-item" id="product2">
                     <div class="product-image">
                         <img src="assets/product2.jpg" alt="Women's Shoes">
                     </div>
@@ -58,14 +75,41 @@
                         <h3>Women's Shoes</h3>
                         <p class="price">$79.99</p>
                         <p>Step out in style with these elegant women's shoes. Designed with comfort in mind, they are perfect for both day and night wear.</p>
+                        
+                        <!-- Save Item -->
                         <button class="save-item" 
                                 data-product-name="Women's Shoes" 
                                 data-product-price="$79.99" 
                                 data-product-image="assets/product2.jpg"
                                 data-product-description="Step out in style with these elegant women's shoes. Designed with comfort in mind, they are perfect for both day and night wear.">Save Item</button>
+
+                        <!-- Size Selector -->
+                        <label for="size-select-product2">Select Size:</label>
+                        <select id="size-select-product2">
+                            <option value="">Choose size</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+
+                        <!-- Check Availability -->
+                        <button class="check-availability" data-product-id="product2">Check Availability</button>
+                        <div id="availability-status-product2"></div>
+
+                        <!-- Store Selection -->
+                        <p><strong>Shopping From:</strong> <span id="selected-store-product2">None</span></p>
                     </div>
                 </div>
             </div>
+
+            <!-- Store Search -->
+            <section id="store-availability">
+                <h3>Find Stores in Your Area</h3>
+                <label for="zipcode-input">Enter Your Zip Code:</label>
+                <input type="text" id="zipcode-input" placeholder="Enter zip code" />
+                <button id="find-stores-btn">Find Stores</button>
+                <div id="store-list"></div>
+            </section>
         </section>
     </main>
 
@@ -76,3 +120,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
