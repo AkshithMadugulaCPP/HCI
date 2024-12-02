@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+.hamburger-menu {
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 20px;
+}
+.hamburger-menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px;
+    background-color: #000;
+}
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+}
+.search-section {
+    text-align: center;
+    margin: 20px 0;
+}
+.search-tags button {
+    margin: 5px;
+    padding: 10px;
+}
+.search-bar-container {
+    margin-top: 20px;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#search-bar {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.recommended-section, .recently-viewed-section {
+    margin: 10px 20px;
+}
+.recommended-items, .recently-viewed-items {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+.item {
+    position: relative;
+    margin-right: 10px;
+    flex: 0 0 calc(16.66%);
+    box-sizing: border-box;
+    text-align: center;
+}
+.item img {
+    width: 100%;
+    height: auto;
+}
+.item-name {
+    font-size: 14px;
+    margin-top: 5px;
+}
+.item-price {
+    font-size: 14px;
+    margin-top: 2px;
+    color: #333;
+}
+.view-item {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+}

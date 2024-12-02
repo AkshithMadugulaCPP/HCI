@@ -1,71 +1,68 @@
-// Handle saving items to the saved list
-const saveButtons = document.querySelectorAll('.save-item');
+document.addEventListener("DOMContentLoaded", () => {
+    const recommendedItems = document.querySelectorAll(".view-item");
+    const productLinks = document.querySelectorAll(".product-link");
+    const recentlyViewedContainer = document.getElementById("recently-viewed-items");
+    
+    // Load recently viewed items from localStorage
+    const loadRecentlyViewedItems = () => {
+        const recentlyViewedItems = JSON.parse(localStorage.getItem("recentlyViewedItems")) || [];
+        recentlyViewedContainer.innerHTML = "";
+        recentlyViewedItems.forEach(item => {
+            const div = document.createElement("div");
+            div.classList.add("item");
+            div.innerHTML = `<a href="product-page.html"><img src="${item.imgSrc}" alt="${item.altText}"></a><p class="item-name">${item.name || ''}</p><p class="item-price">${item.price || ''}</p>`;
+            recentlyViewedContainer.appendChild(div);
+        });
+    };
 
-saveButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        const productName = this.getAttribute('data-product-name');
-        const productPrice = this.getAttribute('data-product-price');
-        const productImage = this.getAttribute('data-product-image');
+    // Add click event listeners to recommended items
+    recommendedItems.forEach(button => {
+        button.addEventListener("click", (e) => {
+            const parentItem = e.target.closest(".item");
+            const itemId = parentItem.dataset.id;
+            const imgSrc = parentItem.querySelector("img").src;
+            const altText = parentItem.querySelector("img").alt;
+            const name = parentItem.querySelector(".item-name").textContent.trim();
+            const price = parentItem.querySelector(".item-price").textContent.trim();
+            
+            let recentlyViewedItems = JSON.parse(localStorage.getItem("recentlyViewedItems")) || [];
 
-        // Create saved item data
-        const savedItem = {
-            name: productName,
-            price: productPrice,
-            imageUrl: productImage
-        };
+            // Remove the item if it already exists to add it at the beginning
+            recentlyViewedItems = recentlyViewedItems.filter(item => item.id !== itemId);
+            
+            // Add the clicked item to the beginning of recently viewed
+            recentlyViewedItems.unshift({ id: itemId, imgSrc, altText, name, price });
+            localStorage.setItem("recentlyViewedItems", JSON.stringify(recentlyViewedItems));
 
-        // Save item to localStorage
-        let savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
-        savedItems.push(savedItem);
-        localStorage.setItem('savedItems', JSON.stringify(savedItems));
-
-        // Alert the user
-        alert(`${productName} has been saved to your list!`);
-    });
-});
-
-// Display saved items on the Saved Items page
-window.onload = function() {
-    const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
-    const savedListElement = document.getElementById('saved-list');
-
-    // Clear any previous saved items from the page on load (reset saved items list)
-    savedListElement.innerHTML = '';
-
-    savedItems.forEach((item, index) => {
-        const itemElement = document.createElement('div');
-        itemElement.classList.add('saved-item');
-
-        itemElement.innerHTML = `
-            <img src="${item.imageUrl}" alt="${item.name}">
-            <h3>${item.name}</h3>
-            <p>${item.price}</p>
-            <button class="remove-item" data-index="${index}">Remove</button>
-        `;
-
-        savedListElement.appendChild(itemElement);
-    });
-
-    // Add event listener for removing saved items
-    const removeButtons = document.querySelectorAll('.remove-item');
-    removeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const index = this.getAttribute('data-index');
-            removeItemFromSaved(index);
+            loadRecentlyViewedItems();
         });
     });
-};
 
-// Function to remove item from saved list
-function removeItemFromSaved(index) {
-    let savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+    // Add click event listeners to product links
+    productLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            const parentItem = e.target.closest(".item");
+            const itemId = parentItem.dataset.id;
+            const imgSrc = parentItem.querySelector("img").src;
+            const altText = parentItem.querySelector("img").alt;
+            const name = parentItem.querySelector(".item-name").textContent.trim();
+            const price = parentItem.querySelector(".item-price").textContent.trim();
+            
+            let recentlyViewedItems = JSON.parse(localStorage.getItem("recentlyViewedItems")) || [];
 
-    // Remove the item by index
-    savedItems.splice(index, 1);
+            // Remove the item if it already exists to add it at the beginning
+            recentlyViewedItems = recentlyViewedItems.filter(item => item.id !== itemId);
+            
+            // Add the clicked item to the beginning of recently viewed
+            recentlyViewedItems.unshift({ id: itemId, imgSrc, altText, name, price });
+            localStorage.setItem("recentlyViewedItems", JSON.stringify(recentlyViewedItems));
 
-    // Save the updated list back to localStorage
-    localStorage.setItem('savedItems', JSON.stringify(savedItems));
+            loadRecentlyViewedItems();
+            window.location.href = link.href;
+        });
+    });
 
-    // Reload the saved items page to reflect changes
-    location.reload();
-}
+    // Initial load of recently viewed items
+    loadRecentlyViewedItems();
+});
