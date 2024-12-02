@@ -1,0 +1,177 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zara - Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <header class="header">
+      <div class="header-top">
+          
+          <div class="logo">
+              <img src="assets/zara-logo.png" alt="ZARA">
+          </div>
+
+          <div class="header-right">
+              <div class="top-links">
+                  <a href="home.html">Home</a>
+              </div>
+          </div>
+      </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+      <section id="product-details">
+          <h2>Product Details</h2>
+          <div class="product-container">
+              <!-- First Product (Blazer) -->
+              <div class="product-item" id="product123">
+                  <div class="product-image">
+                      <img src="assets/washed-sweater.jpg" alt="Washed Sweater">
+                  </div>
+                  <div class="product-info">
+                      <h3>Washed Sweater</h3>
+                      <p class="price">$89.99</p>
+                      <p>Casual Mens Washed Sweater</p>
+                     
+
+                      <!-- Size Selector and Store Availability Check -->
+                      <label for="size-select-product123">Select Size:</label>
+                      <select id="size-select-product123">
+                          <option value="">Choose size</option>
+                          <option value="S">S</option>
+                          <option value="M">M</option>
+                          <option value="L">L</option>
+                      </select>
+
+                      <button class="check-availability" data-product-id="product123">Check Availability</button>
+                      <div id="store-info"></div> <!-- This will display the selected store -->
+
+                      <div id="availability-status-product123"></div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Zip Code and Store Search -->
+          <section id="store-availability">
+              <h3>Find Stores in Your Area</h3>
+              <label for="zipcode-input">Enter Your Zip Code:</label>
+              <input type="text" id="zipcode-input" placeholder="Enter zip code" />
+              <button id="find-stores-btn">Find Stores</button>
+
+              <div id="store-list"></div>
+          </section>
+
+      </section>
+  </main>
+
+  <footer class="footer">
+      <p>&copy; 2024 Zara. All Rights Reserved.</p>
+  </footer>
+
+  <!-- JavaScript to handle the availability check and store search -->
+  <script>
+    // Event listener for checking availability
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkAvailabilityButtons = document.querySelectorAll('.check-availability');
+
+        checkAvailabilityButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.dataset.productId;
+                const sizeSelect = document.querySelector(`#size-select-${productId}`);
+                const availabilityStatus = document.querySelector(`#availability-status-${productId}`);
+                const selectedSize = sizeSelect.value;
+                const storeInfo = document.getElementById('store-info');
+
+                if (selectedSize === "") {
+                    availabilityStatus.textContent = "Please select a size first.";
+                    availabilityStatus.style.color = "red";
+                    return;
+                }
+
+                // Simulating an availability check
+                checkProductAvailability(productId, selectedSize)
+                  .then(status => {
+                      availabilityStatus.textContent = status;
+                      availabilityStatus.style.color = status === "Available" ? "green" : "red";
+                  })
+                  .catch(err => {
+                      availabilityStatus.textContent = "Error checking availability.";
+                      availabilityStatus.style.color = "red";
+                  });
+
+                if (storeInfo.textContent === "") {
+                    storeInfo.textContent = "Please select a store.";
+                    storeInfo.style.color = "red";
+                }
+            });
+        });
+
+        // Event listener for finding stores based on zip code
+        document.getElementById("find-stores-btn").addEventListener("click", function() {
+            const zipCode = document.getElementById("zipcode-input").value;
+            const storeList = document.getElementById("store-list");
+
+            if (!zipCode) {
+                storeList.innerHTML = "<p>Please enter a zip code.</p>";
+                return;
+            }
+
+            // Simulating store search based on zip code
+            findStoresByZip(zipCode)
+              .then(stores => {
+                  if (stores.length === 0) {
+                      storeList.innerHTML = "<p>No stores found in your area.</p>";
+                  } else {
+                      storeList.innerHTML = `<ul>${stores.map(store => `<li class="store-item">${store}</li>`).join('')}</ul>`;
+                  }
+              })
+              .catch(err => {
+                  storeList.innerHTML = "<p>Error fetching stores.</p>";
+              });
+        });
+
+        // Event listener for selecting a store from the list
+        document.getElementById("store-list").addEventListener("click", function(event) {
+            if (event.target && event.target.classList.contains('store-item')) {
+                const storeName = event.target.textContent;
+                const storeInfo = document.getElementById('store-info');
+                storeInfo.textContent = `Shopping from ${storeName}`;
+                storeInfo.style.color = "green";
+            }
+        });
+    });
+
+    // Simulate product availability check (you can replace this with a real API call)
+    function checkProductAvailability(productId, size) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const isAvailable = Math.random() > 0.5; // Random availability
+                resolve(isAvailable ? "Available" : "Out of stock");
+            }, 1000);
+        });
+    }
+
+    // Simulate finding stores based on the zip code (you can replace this with a real API call)
+    function findStoresByZip(zipCode) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // Simulate some store names
+                const stores = {
+                    "91767": ["Store A - Pomona", "Store B - Claremont", "Store C - La Verne"],
+                    "20001": ["Store C - Washington, D.C.", "Store D - Arlington"],
+                    "30001": ["Store E - Atlanta", "Store F - Marietta"]
+                };
+
+                const result = stores[zipCode] || [];
+                resolve(result);
+            }, 1000);
+        });
+    }
+  </script>
+</body>
+</html>
